@@ -1,97 +1,97 @@
 ---
 name: get-engine-log
-description: Use this skill to collect, filter, and analyze engine execution logs for debugging and verification purposes.
+description: 使用此技能收集、过滤和分析引擎执行日志，用于调试和验证目的。
 origin: EVC
 ---
 
-# Get Engine Log
+# 获取引擎日志
 
-This skill collects and analyzes engine execution logs for debugging and verification.
+此技能收集和分析引擎执行日志，用于调试和验证。
 
-## When to Activate
+## 激活时机
 
-- After running engine executable
-- When debugging engine issues
-- When verifying functionality
-- When collecting logs for analysis
+- 运行引擎可执行文件后
+- 调试引擎问题时
+- 验证功能时
+- 收集日志进行分析时
 
-## Log Collection Modes
+## 日志收集模式
 
-### 1. File Mode
-Collect logs from file:
+### 1. 文件模式
+从文件收集日志：
 
 ```bash
-# Collect from default log file
+# 从默认日志文件收集
 get-engine-log --file ./logs/engine.log
 
-# Collect from custom path
+# 从自定义路径收集
 get-engine-log --file /var/log/engine/output.log
 ```
 
-### 2. Follow Mode
-Real-time log monitoring:
+### 2. 实时模式
+实时日志监控：
 
 ```bash
-# Follow log output
+# 实时跟踪日志输出
 get-engine-log --follow
 
-# Follow with filter
+# 带过滤器的实时跟踪
 get-engine-log --follow --filter "ERROR|WARN"
 ```
 
-### 3. Process Mode
-Attach to running process:
+### 3. 进程模式
+附加到运行中的进程：
 
 ```bash
-# Attach to process by name
+# 按进程名附加
 get-engine-log --process engine
 
-# Attach by PID
+# 按 PID 附加
 get-engine-log --pid 12345
 ```
 
-## Log Filtering
+## 日志过滤
 
-### By Level
+### 按级别
 ```bash
-# Only errors
+# 仅错误
 get-engine-log --level ERROR
 
-# Warnings and above
+# 警告及以上
 get-engine-log --level WARN
 
-# All logs
+# 所有日志
 get-engine-log --level DEBUG
 ```
 
-### By Time Range
+### 按时间范围
 ```bash
-# Last 5 minutes
+# 最近 5 分钟
 get-engine-log --since "5m ago"
 
-# Specific time range
+# 特定时间范围
 get-engine-log --from "2024-01-01 10:00" --to "2024-01-01 11:00"
 ```
 
-### By Keyword
+### 按关键字
 ```bash
-# Filter by keyword
+# 按关键字过滤
 get-engine-log --filter "RHI|Buffer"
 
-# Exclude pattern
+# 排除模式
 get-engine-log --exclude "Trace|Debug"
 ```
 
-## Output Formats
+## 输出格式
 
-### Text Format (Default)
+### 文本格式（默认）
 ```
-[2024-01-01 10:00:00] [INFO] Engine initialized
-[2024-01-01 10:00:01] [INFO] RHI device created
-[2024-01-01 10:00:02] [WARN] Buffer pool near capacity
+[2024-01-01 10:00:00] [INFO] 引擎初始化完成
+[2024-01-01 10:00:01] [INFO] RHI 设备创建成功
+[2024-01-01 10:00:02] [WARN] Buffer 池接近容量上限
 ```
 
-### JSON Format
+### JSON 格式
 ```bash
 get-engine-log --format json
 ```
@@ -99,110 +99,110 @@ get-engine-log --format json
 {
   "timestamp": "2024-01-01T10:00:00Z",
   "level": "INFO",
-  "message": "Engine initialized",
+  "message": "引擎初始化完成",
   "source": "Engine.cpp:42"
 }
 ```
 
-### Summary Format
+### 摘要格式
 ```bash
 get-engine-log --format summary
 ```
 ```
-=== Log Summary ===
-Total entries: 1000
+=== 日志摘要 ===
+总条目: 1000
 INFO: 950
 WARN: 45
 ERROR: 5
 FATAL: 0
 
-Errors found:
-- [10:00:15] Failed to create buffer (Buffer.cpp:100)
-- [10:00:30] Texture upload failed (Texture.cpp:200)
+发现的错误:
+- [10:00:15] 创建 Buffer 失败 (Buffer.cpp:100)
+- [10:00:30] Texture 上传失败 (Texture.cpp:200)
 ```
 
-## Log Analysis
+## 日志分析
 
-### Error Detection
+### 错误检测
 ```bash
-# Check for errors
+# 检查错误
 get-engine-log --check-errors
 
-# Output:
-# Errors found: 2
-# 1. [ERROR] Failed to create buffer
-# 2. [ERROR] Texture upload failed
+# 输出:
+# 发现错误: 2
+# 1. [ERROR] 创建 Buffer 失败
+# 2. [ERROR] Texture 上传失败
 ```
 
-### Memory Leak Detection
+### 内存泄漏检测
 ```bash
-# Check for memory leaks
+# 检查内存泄漏
 get-engine-log --check-memory
 
-# Output:
-# Memory Summary:
-# Total allocations: 1000
-# Total deallocations: 998
-# Potential leaks: 2
+# 输出:
+# 内存摘要:
+# 总分配次数: 1000
+# 总释放次数: 998
+# 潜在泄漏: 2
 ```
 
-### Performance Analysis
+### 性能分析
 ```bash
-# Analyze performance logs
+# 分析性能日志
 get-engine-log --check-performance
 
-# Output:
-# Performance Summary:
-# Frame time: 16.2ms avg, 25.3ms max
-# GPU time: 12.5ms avg
-# CPU time: 3.7ms avg
+# 输出:
+# 性能摘要:
+# 帧时间: 16.2ms 平均, 25.3ms 最大
+# GPU 时间: 12.5ms 平均
+# CPU 时间: 3.7ms 平均
 ```
 
-## Configuration
+## 配置
 
-### Log File Path
+### 日志文件路径
 ```bash
-# Set custom log path
+# 设置自定义日志路径
 export ENGINE_LOG_PATH=/var/log/engine
 get-engine-log
 ```
 
-### Log Retention
+### 日志保留
 ```bash
-# Collect last N log files
+# 收集最近 N 个日志文件
 get-engine-log --retention 10
 ```
 
-## Integration with Development Workflow
+## 与开发工作流集成
 
-### After Build
+### 构建后
 ```bash
-# Run engine and collect logs
+# 运行引擎并收集日志
 ./build/bin/engine --test-mode &
 get-engine-log --follow --output ./logs/test.log
 ```
 
-### For Verification
+### 用于验证
 ```bash
-# Collect logs for verification
+# 收集日志用于验证
 get-engine-log --output ./logs/session.log
 
-# Check for issues
+# 检查问题
 grep -E "ERROR|FATAL" ./logs/session.log
 ```
 
-## Skill Template (待补充)
+## 配置模板（待补充）
 
-以下是用户需要补充的部分：
+以下是用户需要根据实际引擎配置的部分：
 
 ```yaml
 # engine-log-config.yaml
 # 用户根据实际引擎配置
 
 log_source:
-  type: file | stdout | network
-  path: ./logs/engine.log
-  format: text | json | binary
+  type: file | stdout | network    # 日志源类型
+  path: ./logs/engine.log          # 日志路径
+  format: text | json | binary     # 日志格式
 
 log_levels:
   - TRACE
@@ -219,49 +219,49 @@ filters:
     - pattern: "Trace.*"
 
 output:
-  format: text | json | summary
-  file: ./logs/collected.log
-  console: true
+  format: text | json | summary    # 输出格式
+  file: ./logs/collected.log       # 输出文件
+  console: true                    # 控制台输出
 
 analysis:
-  check_errors: true
-  check_memory: true
-  check_performance: true
+  check_errors: true               # 检查错误
+  check_memory: true               # 检查内存
+  check_performance: true          # 检查性能
 ```
 
-## Example Usage
+## 使用示例
 
-### Basic Collection
+### 基本收集
 ```bash
-# Collect all logs
+# 收集所有日志
 get-engine-log --output ./logs/session.log
 ```
 
-### Debug Session
+### 调试会话
 ```bash
-# Run engine with log collection
+# 运行引擎并收集日志
 ./build/bin/engine --debug 2>&1 | get-engine-log --follow --filter ERROR
 ```
 
-### Verification Report
+### 验证报告
 ```bash
-# Generate verification report
+# 生成验证报告
 get-engine-log --format summary --report ./reports/verification.md
 ```
 
-## Checklist
+## 检查清单
 
-When using this skill, verify:
+使用此技能时，请验证：
 
-- [ ] Log source is accessible
-- [ ] Log format is correct
-- [ ] No ERROR level logs found
-- [ ] No FATAL level logs found
-- [ ] Memory allocation/deallocation balanced
-- [ ] Initialization sequence complete
-- [ ] Shutdown sequence complete
-- [ ] No unexpected exceptions
+- [ ] 日志源可访问
+- [ ] 日志格式正确
+- [ ] 无 ERROR 级别日志
+- [ ] 无 FATAL 级别日志
+- [ ] 内存分配/释放平衡
+- [ ] 初始化序列完整
+- [ ] 关闭序列完整
+- [ ] 无意外异常
 
 ---
 
-**Note**: This is a template skill. Users should customize the implementation based on their specific engine logging system.
+**注意**: 这是一个模板技能。用户应根据其特定引擎日志系统自定义实现。
