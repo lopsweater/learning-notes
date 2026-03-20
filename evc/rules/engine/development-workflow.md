@@ -8,9 +8,9 @@ paths:
 ---
 # 引擎开发工作流
 
-> 此文件扩展了 [engine/git-workflow.md](./git-workflow.md)，包含 Git 操作之前的完整功能开发流程。
+> 此文件扩展了 [engine/svn-workflow.md](./svn-workflow.md)，包含 SVN 操作之前的完整功能开发流程。
 
-功能实现工作流描述了开发管道：研究、规划、TDD、代码审查，然后提交到 Git。
+功能实现工作流描述了开发管道：研究、规划、TDD、代码审查，然后提交到 SVN。
 
 ## 功能实现工作流
 
@@ -69,8 +69,8 @@ paths:
 - 内存对齐（SIMD、GPU 缓冲区）
 - 性能回归（帧时间、内存占用）
 
-### 5. 提交与推送
+### 5. 提交到 SVN
 
 - 详细的提交信息
 - 遵循约定式提交格式
-- 参见 [git-workflow.md](./git-workflow.md)
+- 参见 [svn-workflow.md](./svn-workflow.md)

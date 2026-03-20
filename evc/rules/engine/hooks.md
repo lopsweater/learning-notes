@@ -76,19 +76,57 @@ steps:
     run: ctest --test-dir build -C Debug -L cpu --output-on-failure
 ```
 
-## Pre-commit Hook
+## Pre-commit Hook (SVN)
 
-创建 `.git/hooks/pre-commit`:
+创建 SVN pre-commit hook（服务器端 `hooks/pre-commit`）:
+
+```bash
+#!/bin/bash
+
+# SVN pre-commit hook
+# 保存到服务器：/path/to/repo/hooks/pre-commit
+
+REPOS="$1"
+TXN="$2"
+
+# 获取提交的文件列表
+SVNLOOK=/usr/bin/svnlook
+
+# 检查提交信息格式
+$SVNLOOK log -t "$TXN" "$REPOS" | grep -E "^(feat|fix|perf|refactor|docs|test|chore)\([^)]+\):" > /dev/null
+if [ $? -ne 0 ]; then
+    echo "❌ 提交信息格式错误。格式：<type>(<scope>): <description>" >&2
+    echo "示例：feat(rhi): add D3D12 buffer creation" >&2
+    exit 1
+fi
+
+# 检查文件类型（只检查 .cpp/.hpp 文件）
+CHANGED_FILES=$($SVNLOOK changed -t "$TXN" "$REPOS" | grep -E "^[AUD].*\.(cpp|hpp)$" | awk '{print $2}')
+
+if [ -z "$CHANGED_FILES" ]; then
+    exit 0
+fi
+
+echo "✅ Pre-commit check passed"
+exit 0
+```
+
+## 客户端提交前检查脚本
+
+创建本地检查脚本 `scripts/pre-commit-check.sh`:
 
 ```bash
 #!/bin/bash
 
 # 格式检查
 echo "Running clang-format check..."
-clang-format --dry-run --Werror $(git diff --cached --name-only --diff-filter=ACM '*.cpp' '*.hpp')
-if [ $? -ne 0 ]; then
-    echo "❌ Code format check failed. Run: clang-format -i <file>"
-    exit 1
+FILES=$(svn status | grep -E "^[AM].*\.(cpp|hpp)$" | awk '{print $2}')
+if [ -n "$FILES" ]; then
+    clang-format --dry-run --Werror $FILES
+    if [ $? -ne 0 ]; then
+        echo "❌ Code format check failed. Run: clang-format -i <file>"
+        exit 1
+    fi
 fi
 
 # 构建检查
@@ -108,6 +146,7 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "✅ All checks passed"
+echo "Ready to commit: svn commit -m \"<type>(<scope>): <description>\""
 ```
 
 ## Shader 编译检查
