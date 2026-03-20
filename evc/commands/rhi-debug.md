@@ -1,12 +1,12 @@
 ---
-description: RHI 调试命令。诊断和解决 RHI 相关问题，包含资源泄漏、状态错误、同步问题。
+description: Diagnose and resolve RHI layer issues. Resource leak detection, state transition errors, synchronization problems, API error analysis, performance issue investigation.
 ---
 
-# RHI 调试命令
+# RHI Debug Command
 
-此命令帮助诊断和解决 RHI 层的问题。
+This command helps diagnose and resolve RHI layer issues.
 
-## 此命令的功能
+## What This Command Does
 
 1. 资源泄漏检测 - Buffer、Texture、Descriptor 泄漏
 2. 资源状态检查 - 状态转换错误

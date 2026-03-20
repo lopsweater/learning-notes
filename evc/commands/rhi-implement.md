@@ -1,12 +1,12 @@
 ---
-description: RHI 后端实现命令。实现具体的 D3D12/Vulkan 后端代码。
+description: Implement specific D3D12/Vulkan backend code. Read interface definitions, implement backend code, handle platform differences, write test code, generate documentation.
 ---
 
-# RHI 实现命令
+# RHI Implement Command
 
-此命令调用 **rhi-implementer** agent，实现具体的图形 API 后端。
+This command invokes the **rhi-implementer** agent to implement specific graphics API backend.
 
-## 此命令的功能
+## What This Command Does
 
 1. 读取接口定义 - 理解 RHI 接口
 2. 实现后端代码 - D3D12/Vulkan 实现

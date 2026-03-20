@@ -1,12 +1,12 @@
 ---
-description: GPU 侧引擎代码测试驱动开发。Buffer/Texture 管理、渲染管线的测试工作流，包含 Mock RHI 和性能验证。
+description: Enforce GPU-side engine test-driven development workflow. Scaffold interfaces, generate tests FIRST for buffer/texture management and rendering pipelines with Mock RHI. Ensure 80%+ coverage.
 ---
 
-# 引擎 GPU 测试命令
+# Engine GPU Test Command
 
-此命令调用 **engine-gpu-tdd-guide** agent，强制执行 GPU 侧代码的测试驱动开发方法论。
+This command invokes the **engine-gpu-tdd-guide** agent to enforce test-driven development methodology for GPU-side engine code.
 
-## 此命令的功能
+## What This Command Does
 
 1. **定义接口** - GPU 资源管理接口
 2. **编写测试** - Mock RHI + GoogleTest

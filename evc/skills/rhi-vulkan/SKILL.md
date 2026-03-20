@@ -1,17 +1,19 @@
 ---
 name: rhi-vulkan
-description: Vulkan 后端实现。Vulkan RHI 后端的实现细节，包含实例创建、设备初始化、资源管理、命令提交。
-origin: learning-notes
+description: Use this skill when implementing Vulkan backend, debugging Vulkan issues, optimizing Vulkan performance, or learning Vulkan API.
+origin: EVC
 ---
 
-# Vulkan 后端实现
+# Vulkan Backend Implementation
 
-## 激活时机
+This skill provides implementation details for Vulkan RHI backend.
 
-- 实现 Vulkan 后端
-- 调试 Vulkan 问题
-- 优化 Vulkan 性能
-- 学习 Vulkan API
+## When to Activate
+
+- Implementing Vulkan backend
+- Debugging Vulkan issues
+- Optimizing Vulkan performance
+- Learning Vulkan API
 
 ## 核心对象
 

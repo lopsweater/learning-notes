@@ -1,17 +1,19 @@
 ---
 name: rhi-d3d12
-description: D3D12 后端实现。DirectX 12 RHI 后端的实现细节，包含资源创建、命令提交、同步机制。
-origin: learning-notes
+description: Use this skill when implementing D3D12 backend, debugging D3D12 issues, optimizing D3D12 performance, or learning D3D12 API.
+origin: EVC
 ---
 
-# D3D12 后端实现
+# D3D12 Backend Implementation
 
-## 激活时机
+This skill provides implementation details for DirectX 12 RHI backend.
 
-- 实现 D3D12 后端
-- 调试 D3D12 问题
-- 优化 D3D12 性能
-- 学习 D3D12 API
+## When to Activate
+
+- Implementing D3D12 backend
+- Debugging D3D12 issues
+- Optimizing D3D12 performance
+- Learning D3D12 API
 
 ## 核心对象
 

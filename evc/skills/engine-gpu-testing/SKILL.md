@@ -1,18 +1,20 @@
 ---
 name: engine-gpu-testing
-description: GPU 侧引擎代码测试模式。Buffer/Texture 管理、渲染管线的 TDD 工作流，包含 Mock RHI。
-origin: learning-notes
+description: Use this skill when implementing buffer/texture management, descriptor heaps, command lists, or rendering pipelines. Enforces test-driven development with Mock RHI patterns.
+origin: EVC
 ---
 
-# 引擎 GPU 测试工作流
+# Engine GPU Testing Workflow
 
-## 激活时机
+This skill ensures all GPU-side engine code follows TDD principles with comprehensive test coverage.
 
-- 实现 Buffer/Texture 管理
-- 开发 Descriptor Heap
-- 编写 Command List 封装
-- 渲染管线验证
-- GPU 资源生命周期管理
+## When to Activate
+
+- Implementing buffer/texture management
+- Developing descriptor heaps
+- Writing command list wrappers
+- Rendering pipeline verification
+- GPU resource lifecycle management
 
 ## GPU 测试类型
 

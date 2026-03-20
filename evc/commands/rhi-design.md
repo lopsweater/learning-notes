@@ -1,12 +1,12 @@
 ---
-description: RHI 接口设计命令。设计跨平台渲染硬件接口，生成接口定义文件。
+description: Design cross-platform rendering hardware interface. Analyze requirements, define abstract interfaces, verify backend mapping for D3D12/Vulkan, generate interface definition files.
 ---
 
-# RHI 设计命令
+# RHI Design Command
 
-此命令调用 **rhi-architect** agent，设计 RHI 接口层。
+This command invokes the **rhi-architect** agent to design RHI interface layer.
 
-## 此命令的功能
+## What This Command Does
 
 1. 分析需求 - 确定需要支持的功能
 2. 设计接口 - 定义抽象接口

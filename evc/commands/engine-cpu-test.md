@@ -1,12 +1,12 @@
 ---
-description: CPU 侧引擎代码测试驱动开发。数学库、内存分配器、工具类的 TDD 工作流，验证覆盖率和性能基准。
+description: Enforce CPU-side engine test-driven development workflow. Scaffold interfaces, generate tests FIRST for math library, memory allocators, and utilities. Ensure 80%+ coverage with SIMD optimization.
 ---
 
-# 引擎 CPU 测试命令
+# Engine CPU Test Command
 
-此命令调用 **engine-cpu-tdd-guide** agent，强制执行 CPU 侧代码的测试驱动开发方法论。
+This command invokes the **engine-cpu-tdd-guide** agent to enforce test-driven development methodology for CPU-side engine code.
 
-## 此命令的功能
+## What This Command Does
 
 1. **定义接口** - 搭建 CPU 侧类/函数签名
 2. **编写测试** - GoogleTest 单元测试

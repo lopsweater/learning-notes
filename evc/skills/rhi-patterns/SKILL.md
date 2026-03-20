@@ -1,17 +1,19 @@
 ---
 name: rhi-patterns
-description: RHI 设计模式。跨平台渲染硬件接口的设计模式和最佳实践，包含资源管理、状态转换、同步模式。
-origin: learning-notes
+description: Use this skill when designing RHI interfaces, implementing cross-platform rendering layers, optimizing RHI performance, or resolving RHI architecture issues.
+origin: EVC
 ---
 
-# RHI 设计模式
+# RHI Design Patterns
 
-## 激活时机
+This skill provides design patterns and best practices for cross-platform rendering hardware interfaces.
 
-- 设计 RHI 接口
-- 实现跨平台渲染层
-- 优化 RHI 性能
-- 解决 RHI 架构问题
+## When to Activate
+
+- Designing RHI interfaces
+- Implementing cross-platform rendering layers
+- Optimizing RHI performance
+- Resolving RHI architecture issues
 
 ## 核心设计模式
 

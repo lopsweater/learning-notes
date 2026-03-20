@@ -1,18 +1,20 @@
 ---
 name: engine-cpu-testing
-description: CPU 侧引擎代码测试模式。数学库、内存分配器、工具类的 TDD 工作流，包含 SIMD 优化和性能基准。
-origin: learning-notes
+description: Use this skill when implementing math library, memory allocators, utilities, or CPU-side engine code. Enforces test-driven development with SIMD optimization and performance benchmarks.
+origin: EVC
 ---
 
-# 引擎 CPU 测试工作流
+# Engine CPU Testing Workflow
 
-## 激活时机
+This skill ensures all CPU-side engine code follows TDD principles with comprehensive test coverage.
 
-- 实现数学库（向量、矩阵、四元数）
-- 编写内存分配器
-- 开发工具类
-- Asset 解析逻辑
-- ECS 系统
+## When to Activate
+
+- Implementing math library (vectors, matrices, quaternions)
+- Writing memory allocators
+- Developing utility classes
+- Asset parsing logic
+- ECS systems
 
 ## CPU 测试类型
 
