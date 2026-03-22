@@ -6,6 +6,7 @@
 git_worktree_workflow_in_svn/
 ├── docs/
 │   ├── README.md              ← 本文档
+│   ├── ARCHITECTURE.md        ← 架构说明
 │   └── QUICKSTART.md          ← 快速入门
 │
 └── scripts/
