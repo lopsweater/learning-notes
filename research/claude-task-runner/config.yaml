@@ -1,0 +1,17 @@
+server:
+  host: "0.0.0.0"
+  port: 3000
+
+frontend:
+  mode: "simple"  # simple, vue, react
+
+claude:
+  timeout: 300
+  default_working_dir: "/root/learning-notes"
+  cli_path: "claude"  # or full path like /usr/local/bin/claude
+
+database:
+  path: "./data/tasks.db"
+
+logging:
+  level: "INFO"

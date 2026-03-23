@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Task Runner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🤖 Claude Task Runner</h1>
+            <p class="subtitle">提交任务，让 Claude Code 自动执行</p>
+        </header>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="stat-card">
+                <span class="stat-value" id="stat-pending">0</span>
+                <span class="stat-label">等待中</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value" id="stat-running">0</span>
+                <span class="stat-label">执行中</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value" id="stat-completed">0</span>
+                <span class="stat-label">已完成</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value" id="stat-failed">0</span>
+                <span class="stat-label">失败</span>
+            </div>
+        </section>
+
+        <!-- Task Form Section -->
+        <section class="form-section">
+            <h2>📝 提交新任务</h2>
+            <form id="task-form">
+                <div class="form-group">
+                    <label for="prompt">提示词 (Prompt) *</label>
+                    <textarea id="prompt" name="prompt" rows="6" required 
+                        placeholder="输入 Claude Code 需要执行的提示词..."></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="working-directory">工作目录 (可选)</label>
+                        <input type="text" id="working-directory" name="working_directory" 
+                            placeholder="/path/to/project">
+                    </div>
+                    <div class="form-group">
+                        <label for="timeout">超时时间 (秒)</label>
+                        <input type="number" id="timeout" name="timeout" value="300" min="10" max="3600">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="callback-url">回调 URL (可选)</label>
+                    <input type="url" id="callback-url" name="callback_url" 
+                        placeholder="https://example.com/callback">
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <span class="btn-text">提交任务</span>
+                    <span class="btn-loading" style="display:none;">提交中...</span>
+                </button>
+            </form>
+        </section>
+
+        <!-- Task List Section -->
+        <section class="tasks-section">
+            <div class="section-header">
+                <h2>📋 任务列表</h2>
+                <div class="filter-group">
+                    <select id="status-filter">
+                        <option value="">全部状态</option>
+                        <option value="pending">等待中</option>
+                        <option value="running">执行中</option>
+                        <option value="completed">已完成</option>
+                        <option value="failed">失败</option>
+                    </select>
+                    <button class="btn btn-secondary" id="refresh-btn">🔄 刷新</button>
+                </div>
+            </div>
+            <div class="tasks-table-container">
+                <table class="tasks-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>提示词</th>
+                            <th>状态</th>
+                            <th>创建时间</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tasks-tbody">
+                        <!-- Tasks will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="pagination" id="pagination">
+                <!-- Pagination will be loaded here -->
+            </div>
+        </section>
+    </div>
+
+    <!-- Task Detail Modal -->
+    <div class="modal" id="task-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>任务详情</h3>
+                <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Task details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
