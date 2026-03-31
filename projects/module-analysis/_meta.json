@@ -1,0 +1,9 @@
+{
+  "name": "module-analysis",
+  "version": "1.0.0",
+  "description": "游戏引擎模块分析工具",
+  "author": "OpenClaw",
+  "created": "2026-03-31",
+  "keywords": ["game-engine", "analysis", "architecture", "module"],
+  "repository": "https://github.com/openclaw/openclaw"
+}

@@ -1,0 +1,53 @@
+{
+  "name": "claude-code-module-analysis",
+  "version": "1.0.0",
+  "description": "游戏引擎模块分析插件 - Claude Code 团队部署版本",
+  "author": "OpenClaw",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "plugin",
+    "game-engine",
+    "analysis",
+    "unreal-engine",
+    "unity",
+    "godot"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/openclaw/openclaw"
+  },
+  "engines": {
+    "claude-code": ">=1.0.0"
+  },
+  "main": "SKILL.md",
+  "files": [
+    "SKILL.md",
+    "commands/",
+    "templates/",
+    "references/",
+    "README.md"
+  ],
+  "claude-code": {
+    "skills": [
+      {
+        "name": "module-analysis",
+        "path": "SKILL.md",
+        "description": "游戏引擎模块分析工具"
+      }
+    ],
+    "commands": [
+      {
+        "name": "ge-module-analysis",
+        "path": "commands/ge-module-analysis.md",
+        "description": "分析游戏引擎架构和模块"
+      }
+    ]
+  },
+  "scripts": {
+    "install": "echo 'Module Analysis plugin installed successfully'",
+    "test": "echo 'Run: /ge-module-analysis --help'"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
