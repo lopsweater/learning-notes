@@ -1,0 +1,44 @@
+{
+  "name": "ge-build-fix",
+  "version": "1.0.0",
+  "description": "游戏引擎编译修复工具 - Claude Code 插件",
+  "author": "OpenClaw",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "plugin",
+    "game-engine",
+    "build-fix",
+    "compiler",
+    "d3d12",
+    "vulkan"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lopsweater/learning-notes"
+  },
+  "engines": {
+    "claude-code": ">=1.0.0"
+  },
+  "files": [
+    "skills/ge-build-fix/SKILL.md",
+    "commands/ge-build-fix.md",
+    "README.md"
+  ],
+  "claude-code": {
+    "skills": [
+      {
+        "name": "ge-build-fix",
+        "path": "skills/ge-build-fix/SKILL.md",
+        "description": "游戏引擎编译修复工具"
+      }
+    ],
+    "commands": [
+      {
+        "name": "ge-build-fix",
+        "path": "commands/ge-build-fix.md",
+        "description": "自动诊断和修复编译错误"
+      }
+    ]
+  }
+}
