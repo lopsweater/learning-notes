@@ -1,43 +1,26 @@
 # GE Build Fix - 游戏引擎编译修复工具
 
-> 🔧 自动诊断和修复游戏引擎特有的编译错误
+> 🔧 专业游戏引擎编译错误诊断与修复工具
 
-## 📦 插件内容
-
-### 核心文件
+## 📦 核心文件
 
 | 文件 | 大小 | 说明 |
 |------|------|------|
-| `skills/ge-build-fix/SKILL.md` | 12.8KB | ⭐ Claude Code 技能定义 |
-| `commands/ge-build-fix.md` | 12.5KB | ⭐ 斜杠命令 |
-
-## 🚀 快速使用
-
-```bash
-# 自动诊断并修复
-/ge-build-fix
-
-# 修复特定错误
-/ge-build-fix --error C2065
-
-# 针对特定平台
-/ge-build-fix --platform windows
-
-# 快速模式
-/ge-build-fix --quick
-```
+| `agents/build-error-resolver.md` | 6.1KB | ⭐ 构建错误解决 Agent |
+| `skills/ge-build-fix/SKILL.md` | 8.1KB | ⭐ 编译修复技能 |
+| `commands/ge-build-fix.md` | 13.9KB | ⭐ 斜杠命令 |
 
 ## ✨ 核心特性
 
 ### 支持的错误类型
 
-| 类别 | 错误示例 | 修复能力 |
-|------|----------|---------|
-| **平台特定** | C2065 (MSVC), GCC 错误 | ✅ 自动修复 |
+| 类别 | 示例 | 修复能力 |
+|------|------|---------|
+| **C++ 编译** | C2065, C2011, C2664 | ✅ 自动修复 |
 | **图形 API** | D3D12/Vulkan 未找到 | ✅ 自动修复 |
-| **模板错误** | 类型转换失败 | ✅ 自动修复 |
 | **链接错误** | LNK2019, undefined reference | ✅ 自动修复 |
-| **CMake 错误** | 依赖查找失败 | ✅ 自动修复 |
+| **CMake 错误** | FindPackage, 配置问题 | ✅ 自动修复 |
+| **平台特定** | Windows/Linux/macOS | ✅ 自动修复 |
 
 ### 支持的平台
 
@@ -52,6 +35,31 @@
 - ✅ **OpenGL** - 传统图形 API
 - ✅ **Metal** - Apple 平台
 
+## 🚀 快速使用
+
+```bash
+# 自动诊断修复
+/ge-build-fix
+
+# 修复特定错误
+/ge-build-fix --error C2065
+
+# 针对特定平台
+/ge-build-fix --platform linux
+
+# 快速模式
+/ge-build-fix --quick
+
+# 批量修复
+/ge-build-fix --all
+
+# 交互模式
+/ge-build-fix --interactive
+
+# 修复后验证
+/ge-build-fix --verify
+```
+
 ## 🔍 工作流程
 
 ```
@@ -59,13 +67,12 @@
     ↓
 读取日志
     ↓
-错误分类 ─┬─ 平台特定错误
+错误分类 ─┬─ C++ 编译错误
           ├─ 图形 API 错误
-          ├─ 模板/类型错误
           ├─ 链接错误
           └─ CMake 错误
     ↓
-环境检查
+环境诊断
     ↓
 生成修复方案
     ↓
@@ -87,7 +94,6 @@ error C2065: 'ID3D12Device': undeclared identifier
 
 **修复**:
 ```cpp
-// 添加头文件
 #include <d3d12.h>
 #include <dxgi1_6.h>
 
@@ -95,7 +101,20 @@ error C2065: 'ID3D12Device': undeclared identifier
 #pragma comment(lib, "dxgi.lib")
 ```
 
-### 示例 2：链接错误
+### 示例 2：Vulkan 链接错误
+
+**错误**:
+```
+undefined reference to 'vkCreateInstance'
+```
+
+**修复**:
+```cmake
+find_package(Vulkan REQUIRED)
+target_link_libraries(engine Vulkan::Vulkan)
+```
+
+### 示例 3：导出宏缺失
 
 **错误**:
 ```
@@ -104,7 +123,6 @@ error LNK2019: unresolved external symbol "RHIDevice::CreateBuffer"
 
 **修复**:
 ```cpp
-// 添加导出宏
 #ifdef ENGINE_BUILD_RHI
     #define RHI_API __declspec(dllexport)
 #else
@@ -114,27 +132,12 @@ error LNK2019: unresolved external symbol "RHIDevice::CreateBuffer"
 class RHI_API RHIDevice { /* ... */ };
 ```
 
-### 示例 3：CMake 依赖错误
-
-**错误**:
-```
-CMake Error: Could not find a package configuration file provided by "Vulkan"
-```
-
-**修复**:
-```cmake
-# 设置 Vulkan SDK 路径
-set(VULKAN_SDK $ENV{VULKAN_SDK})
-find_package(Vulkan REQUIRED PATHS "${VULKAN_SDK}")
-target_link_libraries(engine Vulkan::Vulkan)
-```
-
 ## 🎯 使用场景
 
 ### 场景 1：跨平台编译失败
 
 ```bash
-# 在 Windows 上编译 Linux 目标时出错
+# Windows 上编译 Linux 目标
 /ge-build-fix --platform linux --compiler gcc
 ```
 
@@ -145,40 +148,43 @@ target_link_libraries(engine Vulkan::Vulkan)
 /ge-build-fix --api vulkan
 ```
 
-### 场景 3：依赖更新
+### 场景 3：批量修复
 
 ```bash
-# Vulkan SDK 更新后编译失败
-/ge-build-fix --api vulkan --verify
+# 修复所有编译错误
+/ge-build-fix --all --verify
 ```
 
 ## 🛠️ 高级功能
 
-### 批量修复
-
-```bash
-# 修复所有错误
-/ge-build-fix --all
-```
-
 ### 交互模式
 
 ```bash
-# 逐步确认修复
 /ge-build-fix --interactive
+
+# 输出:
+# 错误 1/5: C2065 - 未声明标识符
+# 文件: src/renderer/d3d12_device.cpp:45
+# 修复: 添加 #include <d3d12.h>
+#
+# 应用此修复？(y/n/skip/all)
 ```
 
 ### 验证模式
 
 ```bash
-# 修复后自动编译验证
 /ge-build-fix --verify
+
+# 输出:
+# ✅ 已应用修复
+# 🔨 正在重新编译...
+# [========================================] 100%
+# ✅ 编译成功！
 ```
 
 ### 从日志分析
 
 ```bash
-# 分析特定日志文件
 /ge-build-fix --log path/to/build.log
 ```
 
@@ -197,7 +203,7 @@ target_link_libraries(engine Vulkan::Vulkan)
 
 ## 🔧 集成到项目
 
-### 方法一：CLAUDE.md 配置
+### CLAUDE.md 配置
 
 ```markdown
 # 编译修复工具
@@ -205,14 +211,15 @@ target_link_libraries(engine Vulkan::Vulkan)
 使用 `/ge-build-fix` 自动修复编译错误。
 
 支持的错误类型：
-- MSVC 错误 (C2065, C2011, C3861...)
+- MSVC 错误 (C2065, C2011, C2664...)
 - 链接错误 (LNK2019, LNK2001...)
 - CMake 错误 (FindPackage, 依赖配置...)
+- 图形 API 错误 (D3D12, Vulkan, OpenGL)
 
 快速使用: `/ge-build-fix`
 ```
 
-### 方法二：构建脚本集成
+### 构建脚本集成
 
 ```bash
 #!/bin/bash
@@ -226,60 +233,60 @@ if [ $? -ne 0 ]; then
 fi
 ```
 
-## 📚 最佳实践
+## 🎓 最佳实践
 
-### 1. 错误隔离
+### 1. 增量修复
+
 ```bash
-# 只编译失败的目标
-cmake --build . --target failed_target
+# 一次只修复一个错误
 /ge-build-fix --quick
 ```
 
-### 2. 增量修复
+### 2. 错误隔离
+
 ```bash
-# 逐个修复，避免连锁问题
-/ge-build-fix --interactive
+# 只编译失败的目标
+cmake --build . --target failed_target
+/ge-build-fix
 ```
 
 ### 3. 环境验证
+
 ```bash
 # 修复前检查环境
 /ge-build-fix --check-env
 ```
 
-## 🎓 常见问题
+## 📚 参考资料
 
-### Q: 修复后仍有错误？
+本工具参考了以下资源：
 
-**A**: 检查依赖链，多次运行：
-```bash
-/ge-build-fix && cmake --build . && /ge-build-fix
-```
+- **Everything Claude Code** - build-error-resolver agent
+- **Unreal Engine** - 编译修复流程
+- **Vulkan SDK** - 最佳实践
+- **DirectX 12** - 开发指南
 
-### Q: 自动修复不安全？
+## 🎯 设计原则
 
-**A**: 使用交互模式：
-```bash
-/ge-build-fix --interactive  # 每次修复前确认
-```
+### 1. 最小化改动
 
-### Q: 支持我的编译器吗？
+只修复错误本身，不重构、不改变架构
 
-**A**: 支持主流编译器：
-- MSVC (Visual Studio)
-- GCC
-- Clang
+### 2. 快速迭代
 
-### Q: 会修改我的代码吗？
+修复一个错误 → 验证 → 下一个错误
 
-**A**: 所有修改都会：
-- 创建备份（.bak 文件）
-- 显示修改内容
-- 等待用户确认（交互模式）
+### 3. 平台感知
+
+根据目标平台和编译器提供针对性修复
+
+### 4. 智能诊断
+
+先诊断根因，再提供最小修复方案
 
 ## 📊 统计信息
 
-- **版本**: 1.0.0
+- **版本**: 2.0.0
 - **支持错误类型**: 50+
 - **支持平台**: 3 (Windows/Linux/macOS)
 - **支持编译器**: 3 (MSVC/GCC/Clang)

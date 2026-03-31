@@ -1,6 +1,6 @@
 {
   "name": "ge-build-fix",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "游戏引擎编译修复工具 - Claude Code 插件",
   "author": "OpenClaw",
   "license": "MIT",
@@ -11,7 +11,8 @@
     "build-fix",
     "compiler",
     "d3d12",
-    "vulkan"
+    "vulkan",
+    "unreal-engine"
   ],
   "repository": {
     "type": "git",
@@ -21,11 +22,20 @@
     "claude-code": ">=1.0.0"
   },
   "files": [
+    "agents/build-error-resolver.md",
     "skills/ge-build-fix/SKILL.md",
     "commands/ge-build-fix.md",
-    "README.md"
+    "README.md",
+    "QUICK-REF.md"
   ],
   "claude-code": {
+    "agents": [
+      {
+        "name": "ge-build-resolver",
+        "path": "agents/build-error-resolver.md",
+        "description": "游戏引擎构建错误解决专家"
+      }
+    ],
     "skills": [
       {
         "name": "ge-build-fix",
